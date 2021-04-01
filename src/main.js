@@ -61,12 +61,12 @@ function result(randomizeEvent) {
         let weight = Math.round(300);
         let temperature =  Math.round(94);
     }
-    // ! story.textContent = ;
+    // ! story.textContent = Falta;
     story.style.visibility = 'visible';
 
     generatingRandomStory = () => {
-        if (customName === "bob") {
-            story.innerHTML=`Hablalo`;
+        if (customName.value === "bob") {
+            story.innerHTML=`Hablalo    `;
         }else{
             story.innerHTML= `${(newStory.replace(originalTextRegex, xItem).replace(originalTextRegex, yItem))
                 .replace(originalTextRegex, zItem).replace(originalTextRegex, xItem)};`
