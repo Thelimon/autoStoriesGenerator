@@ -2,8 +2,8 @@
 const customName = document.getElementById('customname');
 const randomize = document.querySelector('.randomize');
 const story = document.querySelector('.story');
-const originalTextRegex = new RegExp('(?:(:insertx:|:inserty:|:insertz:))');
-const finalTextStoryRegEx = new RegExp('(?:(Willy theGoblin|Big Daddy|Father Christmas|the soup kitchen|Disneyland' +
+const originalTextRegex = new RegExp('((:insertx:|:inserty:|:insertz:))');
+const finalTextStoryRegEx = new RegExp('((Willy theGoblin|Big Daddy|Father Christmas|the soup kitchen|Disneyland' +
     '|the White House|spontaneously combusted|melted into a puddle on the sidewalk|' +
     'turned into a slug and crawled away))');
 
@@ -43,37 +43,35 @@ randomize.addEventListener('click', (randomizeEvent)=>{
 });
 
 function result(randomizeEvent) {
-
   /**
    * newStory: is just a container for the main text
    * (x,y,z)Item it a container for arrays that contains random texts *
   */
-
     newStory = storyText;
     xItem = randomValueFromArray(insertX);
     yItem = randomValueFromArray(insertY);
     zItem = randomValueFromArray(insertZ);
 
-    if(customName.value !== '') {
-        let name = customName.value;
-    }
+    generatingRandomStoryFromStartText();
     if(document.getElementById("uk").checked) {
-        let weight = Math.round(300);
-        let temperature =  Math.round(94);
+        let weight = Math.round(300*0.0714286 + 'stone');
+        let temperature = Math.round(94);
     }
-    // ! story.textContent = Falta;
     story.style.visibility = 'visible';
 
-    generatingRandomStory = () => {
-        if (customName.value === "bob") {
-            story.innerHTML=`Hablalo    `;
+}
+
+generatingRandomStoryFromStartText = () => {
+    if (customName.value.toLowerCase() !== "Bob") {
+        let custonNameAux= customName.value;
+        story.innerHTML =`${newStory.replace("Bob", custonNameAux) 
+            .replace(originalTextRegex, yItem).replace(originalTextRegex, zItem)
+            .replace(originalTextRegex, xItem).replace(originalTextRegex, xItem)}`;
         }else{
             story.innerHTML= `${(newStory.replace(originalTextRegex, xItem).replace(originalTextRegex, yItem))
                 .replace(originalTextRegex, zItem).replace(originalTextRegex, xItem)};`
         }
     }
-    generatingRandomStory();
-}
 
 
 
