@@ -1,15 +1,18 @@
 //1. COMPLETE VARIABLE AND FUNCTION DEFINITIONS
+const weight = 300;
+const temperature = 94 ;
 const customName = document.getElementById('customname');
 const randomize = document.querySelector('.randomize');
 const story = document.querySelector('.story');
-const originalTextRegex = new RegExp('((:insertx:|:inserty:|:insertz:))');
+const originalTextRegex = new RegExp('((:insertx:|:inserty:|:insertz:|300 pounds|94 fahrenheit))');
 const finalTextStoryRegEx = new RegExp('((Willy theGoblin|Big Daddy|Father Christmas|the soup kitchen|Disneyland' +
     '|the White House|spontaneously combusted|melted into a puddle on the sidewalk|' +
     'turned into a slug and crawled away))');
 
+//Original text & array containers
 storyText = "It was 94 fahrenheit outside, so :insertx: went for a walk. When they got to :inserty:, they stared in " +
-    "horror for a few moments, then :insertz:. Bob saw the whole thing, but was not surprised — :insertx: weighs 300 " +
-    "pounds, and it was a hot day.";
+    "horror for a few moments, then :insertz:. Bob saw the whole thing, but was not surprised — :insertx: weighs 300 pounds," +
+    "and it was a hot day.";
 
 insertX = [
     "Willy the Goblin",
@@ -52,26 +55,29 @@ function result(randomizeEvent) {
     yItem = randomValueFromArray(insertY);
     zItem = randomValueFromArray(insertZ);
 
-    generatingRandomStoryFromStartText();
     if(document.getElementById("uk").checked) {
-        let weight = Math.round(300*0.0714286 + 'stone');
-        let temperature = Math.round(94);
+        generatingRandomStoryFromStartText();
+    }else{
+        story.innerHTML = `${(newStory.replace(originalTextRegex, xItem).replace(originalTextRegex, yItem))
+            .replace(originalTextRegex, zItem).replace(originalTextRegex, xItem)};`
     }
     story.style.visibility = 'visible';
-
 }
+console.log(result());
 
 generatingRandomStoryFromStartText = () => {
     if (customName.value.toLowerCase() !== "Bob") {
-        let custonNameAux= customName.value;
-        story.innerHTML =`${newStory.replace("Bob", custonNameAux) 
-            .replace(originalTextRegex, yItem).replace(originalTextRegex, zItem)
-            .replace(originalTextRegex, xItem).replace(originalTextRegex, xItem)}`;
-        }else{
-            story.innerHTML= `${(newStory.replace(originalTextRegex, xItem).replace(originalTextRegex, yItem))
-                .replace(originalTextRegex, zItem).replace(originalTextRegex, xItem)};`
-        }
+        let custonNameAux = customName.value;
+        story.innerHTML = `${newStory.replace("94 fahrenheit", `${parseInt(((temperature*5)/9))} 
+            centigrades`).replace(originalTextRegex, xItem) 
+            .replace(originalTextRegex, yItem).replace(originalTextRegex, yItem)
+            .replace(originalTextRegex, zItem).replace(originalTextRegex, zItem)
+            .replace("Bob", custonNameAux)
+            .replace("300 pounds", `${parseInt(weight * 0.0714286)} stones`)
+        }`;
     }
+}
+
 
 
 
