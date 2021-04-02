@@ -68,7 +68,7 @@ function result(randomizeEvent) {
 generatingRandomStoryFromStartText = () => {
     if (customName.value.toLowerCase() !== "Bob") {
         let customNameAux = customName.value;
-        story.innerHTML = `${newStory.replace(`${"94 fahrenheit"}`, `${parseInt(((temperature*5)/9))} 
+        story.innerHTML = `${newStory.replace(`"94 fahrenheit"`, `${parseInt(((temperature*5)/9))} 
             centigrades`).replace(originalTextRegex, xItem)
             .replace(originalTextRegex, yItem).replace(originalTextRegex, yItem)
             .replace(originalTextRegex, zItem).replace(originalTextRegex, zItem)
