@@ -1,13 +1,14 @@
-//1. COMPLETE VARIABLE AND FUNCTION DEFINITIONS
+//* 1. COMPLETE VARIABLE AND FUNCTION DEFINITIONS
 const weight = 300;
 const temperature = 94 ;
 const customName = document.getElementById('customname');
 const randomize = document.querySelector('.randomize');
 const story = document.querySelector('.story');
-const originalTextRegex = new RegExp('((:insertx:|:inserty:|:insertz:|300 pounds|94 fahrenheit))');
-const finalTextStoryRegEx = new RegExp('((Willy theGoblin|Big Daddy|Father Christmas|the soup kitchen|Disneyland' +
-    '|the White House|spontaneously combusted|melted into a puddle on the sidewalk|' +
-    'turned into a slug and crawled away))');
+
+// *Regex for patterns
+/*const originalTextRegex = new RegExp('((:insert[x,y,z]:))', 'g');*/
+const originalTextRegex = /(:insert[x,y,z]:)/g;
+
 
 //Original text & array containers
 storyText = "It was 94 fahrenheit outside, so :insertx: went for a walk. When they got to :inserty:, they stared in " +
@@ -37,7 +38,7 @@ function randomValueFromArray(array){
     return array[random];
 }
 
-//3. EVENT LISTENER AND PARTIAL FUNCTION DEFINITION
+// *3. EVENT LISTENER AND PARTIAL FUNCTION DEFINITION
 
 randomize.addEventListener('click', result); // !Preguntar este poliformismo raro.
 
@@ -59,20 +60,19 @@ function result(randomizeEvent) {
         generatingRandomStoryFromStartText();
     }else{
         story.innerHTML = `${(newStory.replace(originalTextRegex, xItem).replace(originalTextRegex, yItem))
-            .replace(originalTextRegex, zItem).replace(originalTextRegex, xItem)};`
+            .replace(originalTextRegex, zItem)};`
     }
     story.style.visibility = 'visible';
 }
-console.log(result());
 
 generatingRandomStoryFromStartText = () => {
     if (customName.value.toLowerCase() !== "Bob") {
-        let custonNameAux = customName.value;
-        story.innerHTML = `${newStory.replace("94 fahrenheit", `${parseInt(((temperature*5)/9))} 
-            centigrades`).replace(originalTextRegex, xItem) 
+        let customNameAux = customName.value;
+        story.innerHTML = `${newStory.replace(`${"94 fahrenheit"}`, `${parseInt(((temperature*5)/9))} 
+            centigrades`).replace(originalTextRegex, xItem)
             .replace(originalTextRegex, yItem).replace(originalTextRegex, yItem)
             .replace(originalTextRegex, zItem).replace(originalTextRegex, zItem)
-            .replace("Bob", custonNameAux)
+            .replace("Bob", customNameAux)
             .replace("300 pounds", `${parseInt(weight * 0.0714286)} stones`)
         }`;
     }
